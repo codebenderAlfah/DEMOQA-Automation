@@ -184,4 +184,59 @@ export default class ElementsPage extends BasePage {
         this.colorChangeResult = this.page.locator('#colorChange');
         this.delayedvisiblebtn = this.page.locator('id=visibleAfter');
     }
+
+    async verifyElementsPage() {
+        await this.elementsList.waitFor({state: 'visible', timeout: 10000});
+        await expect(this.elementsList).toBeVisible({timeout: 10000});
+    }
+
+    async clickTextBoxBtn() {
+        await this.textBoxBtn.click();
+        await this.fullNameTxtBox.waitFor({state: 'visible', timeout: 10000});
+        await expect(this.fullNameTxtBox).toBeVisible({timeout: 10000});
+    }
+
+    async enterFullName(fullName: string) {
+        await this.fullNameTxtBox.fill(fullName);
+    }
+
+    async enterEmail(email: string) {
+        await this.emailTxtBox.fill(email);
+    }
+
+    async enterCurrentAddress(currentAddress: string) {
+        await this.currentAddressTxtBox.fill(currentAddress);
+    }
+
+    async enterPermanentAddress(permanentAddress: string) {
+        await this.permanentAddressTxtBox.fill(permanentAddress);
+    }
+    async clickSubmitBtn() {
+        await this.submitBtn.click();
+    }
+    async fillTextBoxForm(fullName: string, email: string, currentAddress: string, permanentAddress: string) {
+        await this.enterFullName(fullName);
+        await this.enterEmail(email);
+        await this.enterCurrentAddress(currentAddress);
+        await this.enterPermanentAddress(permanentAddress);
+        await this.clickSubmitBtn();
+    }
+    async verifyFullName(fullName: string) {
+        await expect(this.fullnameResult).toHaveText(`Name:${fullName}`);
+    }
+    async verifyEmail(email: string) {
+        await expect(this.emailResult).toHaveText(`Email:${email}`,);
+    }
+    async verifyCurrentAddress(currentAddress: string) {
+        await expect(this.currentAddressResult).toHaveText(`Current Address :${currentAddress}`);
+    }
+    async verifyPermanentAddress(permanentAddress: string) {
+        await expect(this.permanentAddressResult).toHaveText(`Permanent Address :${permanentAddress}`);
+    }
+    async verifyTextBoxOutput(fullName: string, email: string, currentAddress: string, permanentAddress: string) {
+        await this.verifyFullName(fullName);
+        await this.verifyEmail(email);
+        await this.verifyCurrentAddress(currentAddress);
+        await this.verifyPermanentAddress(permanentAddress);
+    }
 }
