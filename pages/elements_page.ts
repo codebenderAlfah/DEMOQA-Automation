@@ -109,10 +109,10 @@ export default class ElementsPage extends BasePage {
         this.currentAddressTxtBox = this.page.locator('id=currentAddress');
         this.permanentAddressTxtBox = this.page.locator('id=permanentAddress');
         this.submitBtn = this.page.getByText('Submit');
-        this.fullnameResult = this.page.locator('#name');
-        this.emailResult = this.page.locator('#email');
-        this.currentAddressResult = this.page.locator('#currentAddress');
-        this.permanentAddressResult = this.page.locator('#permanentAddress');
+        this.fullnameResult = this.page.getByText('Name:');
+        this.emailResult = this.page.getByText('Email:');
+        this.currentAddressResult = this.page.getByText('Current Address :');
+        this.permanentAddressResult = this.page.getByText('Permananet Address :');
         this.expandAllcheckBoxBtn = this.page.getByText('Expand all');
         this.collapseAllcheckBoxBtn = this.page.getByText('Collapse all');
         this.HomeCheckBox = this.page.locator('label[for=tree-node-home]');
@@ -231,7 +231,7 @@ export default class ElementsPage extends BasePage {
         await expect(this.currentAddressResult).toHaveText(`Current Address :${currentAddress}`);
     }
     async verifyPermanentAddress(permanentAddress: string) {
-        await expect(this.permanentAddressResult).toHaveText(`Permanent Address :${permanentAddress}`);
+        await expect(this.permanentAddressResult).toHaveText(`Permananet Address :${permanentAddress}`);
     }
     async verifyTextBoxOutput(fullName: string, email: string, currentAddress: string, permanentAddress: string) {
         await this.verifyFullName(fullName);
